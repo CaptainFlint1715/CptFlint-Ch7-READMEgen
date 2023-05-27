@@ -64,11 +64,6 @@ const questions = [
         name: 'reach',
         message: 'Please provide instructions on how to reach you with additional questions.'
     },
-    {
-        type: 'input',
-        name: 'questions',
-        message: ''
-    }
 ]
 
 
@@ -80,7 +75,7 @@ function init() {
         .prompt(questions)
         .then((data) => { 
 
-            fs.writeFile(`README.md`, generateMarkdown(data), (err) => {
+            fs.writeFile(`./md/README.md`, generateMarkdown(data), (err) => {
                 if (err) throw err
                 console.log('Readme created')
             })

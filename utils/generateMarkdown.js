@@ -30,7 +30,10 @@ function renderLicenseBadge(license) {
         'Mozilla Public License 2.0': 'https://img.shields.io/badge/License-MPL%202.0-brightgreen.svg',
         'The Unlicense': 'https://img.shields.io/badge/license-Unlicense-blue.svg',
     };
-    return licenseBadges[license]
+    if (licenseBadges.hasOwnProperty(license)) {
+        return licenseBadges[license]
+    }
+    return ''
 }
 
 // TODO: Create a function that returns the license link
@@ -45,7 +48,10 @@ function renderLicenseLink(license) {
         'Mozilla Public License 2.0': 'https://www.mozilla.org/en-US/MPL/2.0/',
         'The Unlicense': 'https://unlicense.org/',
     }
-    return licenseLinks[license]
+    if (licenseLinks.hasOwnProperty(license)) {
+        return licenseLinks[license]
+    }
+    return ''
 }
 
 // TODO: Create a function that returns the license section of README
@@ -58,8 +64,8 @@ function generateMarkdown(data) {
     const licenseBadgeURL = renderLicenseBadge(license)
     const licenceLink = renderLicenseLink(license)
     const tableOfContents = generateTableOfContents()
-    const readMe =
-`# ${data.title}
+    const readMe = `
+# ${data.title}
 
 ![License Badge](${licenseBadgeURL})
             
@@ -84,14 +90,15 @@ ${data.contributing}
 ## License
             
 This application is covered under the ${data.license}.
+${licenceLink}
             
 ## Questions
             
-${data.github}
+'https://github.com/${data.github}'
+
 ${data.email}
-${data.reach}
-    
-${data.questions}`
+
+${data.reach}`
     
   return readMe
 
